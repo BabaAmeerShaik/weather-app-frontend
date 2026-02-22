@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiUrl = 'http://localhost:5223/api/weather';
+  private apiUrl = 'https://baba-weather-api.azurewebsites.net/api';
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class WeatherService {
       'Authorization': `Bearer ${token}`
     });
 
-    // 3. Make the secure request to the C# API
-    return this.http.get(`${this.apiUrl}/${city}`, { headers });
+    // --- FIXED: Added /weather to the path ---
+    return this.http.get(`${this.apiUrl}/weather/${city}`, { headers });
   }
 }

@@ -7,18 +7,18 @@ import { Observable, tap } from 'rxjs';
 })
 export class AuthService {
   // Point this to your .NET backend URL
-  private apiUrl = 'https://baba-weather-api.azurewebsites.net';
+  private apiUrl = 'https://baba-weather-api.azurewebsites.net/api';
 
   constructor(private http: HttpClient) { }
 
-  // Calls the C# Register endpoint
+  // --- FIXED: Added /auth to the path ---
   register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+    return this.http.post(`${this.apiUrl}/auth/register`, userData);
   }
 
-  // Calls the C# Login endpoint and saves the token
+  // --- FIXED: Added /auth to the path ---
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap((response: any) => {
         if (response && response.token) {
           // Save the VIP pass to the browser's Local Storage
