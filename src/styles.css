@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+#map {
+    height: 400px; /* This is mandatory! Leaflet won't show without a height */
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+    z-index: 1; /* Ensures it stays behind dropdowns but above the background */
+}
+
+/* Fix for broken map tiles (common in Angular) */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}

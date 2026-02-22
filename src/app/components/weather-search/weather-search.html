@@ -1,0 +1,22 @@
+<div style="max-width: 500px; margin: 20px auto; font-family: sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background-color: #f9f9f9;">
+  <h2>Search Weather</h2>
+  
+  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <input type="text" [(ngModel)]="city" placeholder="Enter city name (e.g. London)" style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+    <button (click)="search()" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Search</button>
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red; margin-bottom: 10px;">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="weatherData" style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0;">{{ weatherData.cityName }}</h3>
+    <p><strong>Temperature:</strong> {{ weatherData.temperature }}°C</p>
+    <p><strong>Condition:</strong> <span style="text-transform: capitalize;">{{ weatherData.description }}</span></p>
+    <p><strong>Humidity:</strong> {{ weatherData.humidity }}%</p>
+    <p style="font-size: 0.8em; color: gray;">Lat: {{ weatherData.latitude }}, Lon: {{ weatherData.longitude }}</p>
+    
+    <div id="map" style="height: 300px; width: 100%; display: block; margin-top: 15px; border-radius: 8px; border: 1px solid #ddd; background-color: #eaeaea;"></div>
+  </div>
+</div>
