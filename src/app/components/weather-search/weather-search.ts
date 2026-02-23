@@ -14,7 +14,6 @@ import * as L from 'leaflet';
   styleUrl: './weather-search.css'  // <-- THIS IS THE MISSING MAGIC LINE!
 })
 export class WeatherSearch {
-  // ... rest of your code ...
   city: string = '';
   weatherData: any = null;
   errorMessage: string = '';
@@ -82,11 +81,12 @@ export class WeatherSearch {
   }
 
   logout() {
+    console.log('Logout clicked! Clearing storage...');
     // 1. Force clear the token and any other saved session data
     localStorage.removeItem('jwtToken');
     localStorage.clear(); 
     
-    // 2. Guarantee the redirect to the login page
-    this.router.navigate(['/login']); 
+    // 2. Guarantee the redirect to the login page by forcing the window to reload the path
+    window.location.href = '/login'; 
   }
 }

@@ -40,8 +40,9 @@ export class Login implements OnInit {
         }).subscribe({
           next: (response: any) => {
             console.log('Backend accepted the token!', response);
-            // Save as jwtToken to match your WeatherService!
-            localStorage.setItem('jwtToken', response.token); 
+            // Bulletproof token catch
+            const actualToken = response.token || response.Token || response.jwtToken;
+            localStorage.setItem('jwtToken', actualToken); 
             this.router.navigate(['/weather']);
           },
           error: (err: any) => {
@@ -62,8 +63,10 @@ export class Login implements OnInit {
     if (this.isLoginMode) {
       this.authService.login({ email: this.user.email, password: this.user.password }).subscribe({
         next: (response: any) => {
-          console.log('Token:', response.token);
-          localStorage.setItem('jwtToken', response.token); 
+          // Bulletproof token catch
+          const actualToken = response.token || response.Token || response.jwtToken;
+          console.log('Token:', actualToken);
+          localStorage.setItem('jwtToken', actualToken); 
           this.router.navigate(['/weather']); 
         },
         error: (err: any) => {
