@@ -81,9 +81,12 @@ export class WeatherSearch {
     }).addTo(this.map);
   }
 
-  // --- NEW: The missing logout function! ---
   logout() {
-    this.authService.logout();        // Clears the JWT token from storage
-    this.router.navigate(['/login']); // Sends the user back to the login page
+    // 1. Force clear the token and any other saved session data
+    localStorage.removeItem('jwtToken');
+    localStorage.clear(); 
+    
+    // 2. Guarantee the redirect to the login page
+    this.router.navigate(['/login']); 
   }
 }
