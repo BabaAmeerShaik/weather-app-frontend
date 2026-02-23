@@ -31,36 +31,44 @@
     <div class="dashboard-card results-card" *ngIf="weatherData">
       <div class="results-header">
         <div>
-          <h3 class="location-title">{{ weatherData.name || city }}, {{ weatherData.sys?.country || '' }}</h3>
-          <p class="coordinates">Lat: {{ weatherData.latitude || weatherData.coord?.lat }} | Lon: {{ weatherData.longitude || weatherData.coord?.lon }}</p>
+          <h3 class="location-title">{{ weatherData.cityName || weatherData.name || city }}</h3>
+          <p class="coordinates">
+            Lat: {{ weatherData.latitude || weatherData.coord?.lat }} | 
+            Lon: {{ weatherData.longitude || weatherData.coord?.lon }}
+          </p>
         </div>
-        <span class="status-badge" *ngIf="weatherData.weather">{{ weatherData.weather[0]?.description | titlecase }}</span>
+        <span class="status-badge">
+          {{ (weatherData.weather ? weatherData.weather[0]?.description : weatherData.description) | titlecase }}
+        </span>
       </div>
 
-      <div class="metrics-container" *ngIf="weatherData.main">
+      <div class="metrics-container">
         <div class="metric-primary">
-          <span class="temp-huge">{{ weatherData.main?.temp | number:'1.0-0' }}°</span>
-          <span class="feels-like">Feels like {{ weatherData.main?.feels_like | number:'1.0-0' }}°</span>
+          <span class="temp-huge">
+            {{ (weatherData.temperature ?? weatherData.main?.temp) | number:'1.0-0' }}°
+          </span>
+          <span class="feels-like">
+            Feels like {{ (weatherData.feelsLike ?? weatherData.main?.feels_like) | number:'1.0-0' }}°
+          </span>
         </div>
 
         <div class="metric-secondary-grid">
           <div class="metric-box">
             <span class="metric-label">Humidity</span>
-            <span class="metric-value">{{ weatherData.main?.humidity }}%</span>
+            <span class="metric-value">{{ weatherData.humidity ?? weatherData.main?.humidity }}%</span>
           </div>
           <div class="metric-box">
             <span class="metric-label">Wind Speed</span>
-            <span class="metric-value">{{ weatherData.wind?.speed }} m/s</span>
+            <span class="metric-value">{{ weatherData.windSpeed ?? weatherData.wind?.speed }} m/s</span>
           </div>
           <div class="metric-box">
             <span class="metric-label">Pressure</span>
-            <span class="metric-value">{{ weatherData.main?.pressure }} hPa</span>
+            <span class="metric-value">{{ weatherData.pressure ?? weatherData.main?.pressure }} hPa</span>
           </div>
         </div>
       </div>
 
       <div id="map" class="leaflet-map-container"></div>
-
     </div>
 
   </main>
