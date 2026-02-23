@@ -10,9 +10,11 @@ import * as L from 'leaflet';
   selector: 'app-weather-search',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './weather-search.html'
+  templateUrl: './weather-search.html',
+  styleUrl: './weather-search.css'  // <-- THIS IS THE MISSING MAGIC LINE!
 })
 export class WeatherSearch {
+  // ... rest of your code ...
   city: string = '';
   weatherData: any = null;
   errorMessage: string = '';
