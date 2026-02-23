@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'leaflet/dist/leaflet.css';
+
+/* --- Global EPAM Color Palette --- */
+:root {
+  --primary-blue: #0099cc; 
+  --primary-hover: #007399; 
+  --dark-text: #333333;     
+  --light-text: #666666;    
+  --bg-main: #f4f7f9;       
+  --white: #ffffff;
+  --border-color: #e0e0e0;
+  --error-red: #d9534f;
+  --success-green: #5cb85c;
+}
+
 #map {
     height: 400px; /* This is mandatory! Leaflet won't show without a height */
     width: 100%;
