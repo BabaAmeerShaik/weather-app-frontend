@@ -39,9 +39,9 @@
     </div>
 
     <div class="sso-container">
-      <asl-google-signin-button type="standard" size="large" width="320" theme="outline"></asl-google-signin-button>
+      <asl-google-signin-button type="standard" size="large" [width]="320" theme="outline"></asl-google-signin-button>    
     </div>
-
+    
     <div class="card-footer">
       <p>
         {{ isLoginMode ? "Don't have an account?" : "Already provisioned?" }}
