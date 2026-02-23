@@ -1,22 +1,66 @@
-<div style="max-width: 500px; margin: 20px auto; font-family: sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background-color: #f9f9f9;">
-  <h2>Search Weather</h2>
+<div class="enterprise-layout">
   
-  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <input type="text" [(ngModel)]="city" placeholder="Enter city name (e.g. London)" style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
-    <button (click)="search()" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Search</button>
-  </div>
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="logo-mark-small"></div>
+      <span class="brand-text">WeatherTrax Enterprise</span>
+    </div>
+  </nav>
 
-  <div *ngIf="errorMessage" style="color: red; margin-bottom: 10px;">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="weatherData" style="background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-    <h3 style="margin-top: 0;">{{ weatherData.cityName }}</h3>
-    <p><strong>Temperature:</strong> {{ weatherData.temperature }}°C</p>
-    <p><strong>Condition:</strong> <span style="text-transform: capitalize;">{{ weatherData.description }}</span></p>
-    <p><strong>Humidity:</strong> {{ weatherData.humidity }}%</p>
-    <p style="font-size: 0.8em; color: gray;">Lat: {{ weatherData.latitude }}, Lon: {{ weatherData.longitude }}</p>
+  <main class="dashboard-container">
     
-    <div id="map" style="height: 300px; width: 100%; display: block; margin-top: 15px; border-radius: 8px; border: 1px solid #ddd; background-color: #eaeaea;"></div>
-  </div>
+    <div class="dashboard-card search-card">
+      <h2>Global Weather Intelligence</h2>
+      <p class="subtitle">Query real-time meteorological data by city</p>
+      
+      <div class="search-group">
+        <input 
+          type="text" 
+          [(ngModel)]="city" 
+          placeholder="e.g., Bengaluru, London, Tokyo" 
+          (keyup.enter)="search()">
+        <button class="btn-primary search-btn" (click)="search()">Run Query</button>
+      </div>
+      
+      <div *ngIf="errorMessage" class="alert alert-error">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="dashboard-card results-card" *ngIf="weatherData">
+      <div class="results-header">
+        <div>
+          <h3 class="location-title">{{ weatherData.name || city }}, {{ weatherData.sys?.country || '' }}</h3>
+          <p class="coordinates">Lat: {{ weatherData.latitude || weatherData.coord?.lat }} | Lon: {{ weatherData.longitude || weatherData.coord?.lon }}</p>
+        </div>
+        <span class="status-badge" *ngIf="weatherData.weather">{{ weatherData.weather[0]?.description | titlecase }}</span>
+      </div>
+
+      <div class="metrics-container" *ngIf="weatherData.main">
+        <div class="metric-primary">
+          <span class="temp-huge">{{ weatherData.main?.temp | number:'1.0-0' }}°</span>
+          <span class="feels-like">Feels like {{ weatherData.main?.feels_like | number:'1.0-0' }}°</span>
+        </div>
+
+        <div class="metric-secondary-grid">
+          <div class="metric-box">
+            <span class="metric-label">Humidity</span>
+            <span class="metric-value">{{ weatherData.main?.humidity }}%</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Wind Speed</span>
+            <span class="metric-value">{{ weatherData.wind?.speed }} m/s</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Pressure</span>
+            <span class="metric-value">{{ weatherData.main?.pressure }} hPa</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="map" class="leaflet-map-container"></div>
+
+    </div>
+
+  </main>
 </div>

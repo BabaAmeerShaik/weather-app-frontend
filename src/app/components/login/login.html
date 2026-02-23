@@ -1,40 +1,55 @@
-<div style="max-width: 400px; margin: 50px auto; font-family: sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
-  <h2>{{ isLoginMode ? 'Login' : 'Register' }}</h2>
-  
-  <div *ngIf="message" style="background-color: #f8d7da; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
-    {{ message }}
-  </div>
-
-  <form (ngSubmit)="onSubmit()">
-    <div style="margin-bottom: 15px;" *ngIf="!isLoginMode">
-      <label style="display: block; margin-bottom: 5px;">Username</label>
-      <input type="text" name="username" [(ngModel)]="user.username" required style="width: 100%; padding: 8px;">
+<div class="enterprise-layout">
+  <div class="auth-card">
+    
+    <div class="card-header">
+      <div class="logo-mark"></div>
+      <h2>{{ isLoginMode ? 'Sign In' : 'Create Account' }}</h2>
+      <p class="subtitle">Access your enterprise weather dashboard</p>
     </div>
 
-    <div style="margin-bottom: 15px;">
-      <label style="display: block; margin-bottom: 5px;">Email</label>
-      <input type="email" name="email" [(ngModel)]="user.email" required style="width: 100%; padding: 8px;">
+    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.includes('successful'), 'alert-error': !message.includes('successful')}">
+      {{ message }}
     </div>
 
-    <div style="margin-bottom: 15px;">
-      <label style="display: block; margin-bottom: 5px;">Password</label>
-      <input type="password" name="password" [(ngModel)]="user.password" required style="width: 100%; padding: 8px;">
+    <form (ngSubmit)="onSubmit()" #authForm="ngForm" class="auth-form">
+      
+      <div class="form-group" *ngIf="!isLoginMode">
+        <label for="username">Organization Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required placeholder="e.g., jsmith_corp">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Work Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required placeholder="name@company.com">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="!authForm.valid">
+        {{ isLoginMode ? 'Authenticate' : 'Register Account' }}
+      </button>
+
+    </form>
+
+    <div class="divider">
+      <span>Secure Third-Party SSO</span>
     </div>
 
-    <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-      {{ isLoginMode ? 'Login' : 'Register' }}
-    </button>
-  </form>
+    <div class="sso-container">
+      <asl-google-signin-button type="standard" size="large" width="320" theme="outline"></asl-google-signin-button>
+    </div>
 
-  <hr style="margin: 20px 0;">
+    <div class="card-footer">
+      <p>
+        {{ isLoginMode ? "Don't have an account?" : "Already provisioned?" }}
+        <button type="button" class="btn-link" (click)="onToggleMode()">
+          {{ isLoginMode ? 'Request Access' : 'Sign In' }}
+        </button>
+      </p>
+    </div>
 
-  <button type="button" (click)="onToggleMode()" style="width: 100%; padding: 10px; background-color: transparent; border: 1px solid #007bff; color: #007bff; border-radius: 4px; cursor: pointer;">
-    Switch to {{ isLoginMode ? 'Register' : 'Login' }}
-  </button>
-
-  <hr style="margin: 20px 0;">
-  <div style="text-align: center;">
-    <p style="margin-bottom: 10px;">Or sign in with Google:</p>
-    <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
   </div>
 </div>
