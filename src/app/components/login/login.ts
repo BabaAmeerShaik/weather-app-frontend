@@ -35,13 +35,13 @@ export class Login implements OnInit {
       if (googleUser) {
         console.log('Google gave us a token!', googleUser.idToken);
         
-        // --- FIXED: Pointing directly to the Azure Cloud API ---
         this.http.post('https://baba-weather-api.azurewebsites.net/api/auth/google-login', { 
           idToken: googleUser.idToken 
         }).subscribe({
           next: (response: any) => {
             console.log('Backend accepted the token!', response);
-            localStorage.setItem('token', response.token); 
+            // Save as jwtToken to match your WeatherService!
+            localStorage.setItem('jwtToken', response.token); 
             this.router.navigate(['/weather']);
           },
           error: (err: any) => {
@@ -63,7 +63,7 @@ export class Login implements OnInit {
       this.authService.login({ email: this.user.email, password: this.user.password }).subscribe({
         next: (response: any) => {
           console.log('Token:', response.token);
-          localStorage.setItem('token', response.token); 
+          localStorage.setItem('jwtToken', response.token); 
           this.router.navigate(['/weather']); 
         },
         error: (err: any) => {

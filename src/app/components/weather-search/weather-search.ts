@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // <-- Needed for logout redirect
 import { WeatherService } from '../../services/weather';
+import { AuthService } from '../../services/auth'; // <-- Needed to clear the token
 import * as L from 'leaflet';
 
 @Component({
@@ -16,7 +18,11 @@ export class WeatherSearch {
   errorMessage: string = '';
   private map: any = null;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private authService: AuthService, // <-- Injected auth service
+    private router: Router            // <-- Injected router
+  ) {}
 
   search() {
     if (!this.city) return;
@@ -28,7 +34,8 @@ export class WeatherSearch {
         
         // Wait 200ms to guarantee Angular has fully rendered the *ngIf HTML
         setTimeout(() => {
-          this.updateMap(data.latitude, data.longitude);
+          // Used safe traversal in case the API returns lat/lon differently
+          this.updateMap(data.latitude || data.coord?.lat, data.longitude || data.coord?.lon);
         }, 200);
       },
       error: (err: any) => {
@@ -40,18 +47,18 @@ export class WeatherSearch {
   }
 
   updateMap(lat: number, lon: number) {
+    if (lat === undefined || lon === undefined) return;
+    
     const mapDiv = document.getElementById('map');
     if (!mapDiv) {
       console.error('Map div not found in HTML!');
       return;
     }
 
-    // 1. If the map already exists, just move the camera and wake it up
     if (this.map) {
       this.map.setView([lat, lon], 12);
-      this.map.invalidateSize(); // Wakes up the map tiles
+      this.map.invalidateSize(); 
     } 
-    // 2. If it's the first time searching, build the map
     else {
       this.map = L.map('map').setView([lat, lon], 12);
       
@@ -59,18 +66,22 @@ export class WeatherSearch {
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map);
 
-      // Give Leaflet an extra split second to download the images, then force a redraw
       setTimeout(() => {
         this.map.invalidateSize(); 
       }, 300);
     }
 
-    // Draw a blue circle over the city
     L.circleMarker([lat, lon], {
       color: 'blue',
       fillColor: '#30f',
       fillOpacity: 0.5,
       radius: 10
     }).addTo(this.map);
+  }
+
+  // --- NEW: The missing logout function! ---
+  logout() {
+    this.authService.logout();        // Clears the JWT token from storage
+    this.router.navigate(['/login']); // Sends the user back to the login page
   }
 }
