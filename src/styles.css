@@ -1,248 +1,29 @@
-/* Import Leaflet CSS immediately */
+/* You can add global styles to this file, and also import other style files */
 @import 'leaflet/dist/leaflet.css';
 
+/* --- Global EPAM Color Palette --- */
 :root {
-  /* Clean, Minimalist Palette */
-  --bg-main: #f4f7f9;        /* Soft, airy light gray/blue background */
-  --card-bg: #ffffff;        /* Pure white cards */
-  --text-main: #1e293b;      /* Deep slate (softer than pure black) */
-  --text-muted: #64748b;     /* Soft gray for labels and secondary text */
-  --accent-blue: #0ea5e9;    /* Calming sky blue */
-  --accent-hover: #0284c7;   /* Slightly darker blue for hover states */
-  --border-color: #e2e8f0;   /* Very faint gray for borders */
-  
-  --error-bg: #fef2f2;
-  --error-text: #ef4444;
-  --error-border: #fca5a5;
-
-  /* Clean System Fonts */
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --primary-blue: #0099cc; 
+  --primary-hover: #007399; 
+  --dark-text: #333333;     
+  --light-text: #666666;    
+  --bg-main: #f4f7f9;       
+  --white: #ffffff;
+  --border-color: #e0e0e0;
+  --error-red: #d9534f;
+  --success-green: #5cb85c;
 }
 
-/* --- BASE STYLES --- */
-body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: var(--font-family);
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
+#map {
+    height: 400px; /* This is mandatory! Leaflet won't show without a height */
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+    z-index: 1; /* Ensures it stays behind dropdowns but above the background */
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-main);
-  font-weight: 600;
-  margin-top: 0;
-}
-
-/* --- BUTTONS --- */
-button, .btn-primary {
-  background-color: var(--accent-blue);
-  color: #ffffff;
-  font-family: var(--font-family);
-  font-weight: 500;
-  border: none;
-  border-radius: 8px; /* Soft, friendly rounded corners */
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover, .btn-primary:hover {
-  background-color: var(--accent-hover);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-outline:hover {
-  background-color: #f8fafc;
-  border-color: #cbd5e1;
-}
-
-/* --- NAVIGATION --- */
-.top-nav {
-  background-color: var(--card-bg);
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* Very subtle natural shadow */
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-mark-small {
-  width: 28px;
-  height: 28px;
-  background-color: var(--accent-blue);
-  border-radius: 6px;
-}
-
-.brand-text {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-/* --- CARDS & DASHBOARD --- */
-.dashboard-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.dashboard-card {
-  background-color: var(--card-bg);
-  padding: 40px;
-  border-radius: 16px; /* Soft, modern corners */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  margin-bottom: 30px;
-  border: 1px solid var(--border-color);
-}
-
-.subtitle {
-  color: var(--text-muted);
-  margin-bottom: 25px;
-  font-size: 15px;
-}
-
-/* --- SEARCH BAR --- */
-.search-group {
-  display: flex;
-  gap: 12px;
-}
-
-.search-group input {
-  flex-grow: 1;
-  background-color: #f8fafc;
-  color: var(--text-main);
-  padding: 14px 18px;
-  font-size: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.search-group input:focus {
-  outline: none;
-  background-color: #ffffff;
-  border-color: var(--accent-blue);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); /* Soft blue focus ring */
-}
-
-.search-btn {
-  padding: 14px 30px;
-  font-size: 16px;
-}
-
-/* --- WEATHER METRICS --- */
-.results-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.location-title {
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-}
-
-.coordinates {
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-.status-badge {
-  background-color: #e0f2fe; /* Light blue background */
-  color: var(--accent-hover);
-  padding: 6px 14px;
-  border-radius: 20px; /* Pill shape */
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.metrics-container {
-  display: flex;
-  align-items: center;
-}
-
-.metric-primary {
-  padding-right: 50px;
-  border-right: 1px solid var(--border-color);
-  margin-right: 50px;
-}
-
-.temp-huge {
-  font-size: 72px;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1;
-}
-
-.feels-like {
-  color: var(--accent-blue);
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 12px;
-  display: block;
-}
-
-.metric-secondary-grid {
-  display: flex;
-  gap: 50px;
-}
-
-.metric-label {
-  color: var(--text-muted);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.metric-value {
-  color: var(--text-main);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-/* --- MAP & ALERTS --- */
-.leaflet-map-container {
-  height: 400px;
-  width: 100%;
-  margin-top: 35px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  z-index: 1;
-  /* NO dark mode filters here - leaves the map looking natural */
-}
-
-.alert-error {
-  background-color: var(--error-bg);
-  color: var(--error-text);
-  border: 1px solid var(--error-border);
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 20px;
+/* Fix for broken map tiles (common in Angular) */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
 }
