@@ -1,29 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'leaflet/dist/leaflet.css';
 
-/* --- Global EPAM Color Palette --- */
+/* --- GLOBAL DESIGN SYSTEM VARIABLES --- */
+/* --- src/styles.css --- */
 :root {
-  --primary-blue: #0099cc; 
-  --primary-hover: #007399; 
-  --dark-text: #333333;     
-  --light-text: #666666;    
-  --bg-main: #f4f7f9;       
-  --white: #ffffff;
-  --border-color: #e0e0e0;
-  --error-red: #d9534f;
-  --success-green: #5cb85c;
+  /* Brand Core */
+  --epam-bg: #060606;           /* The deep background */
+  --epam-sea: #00F6FF;          /* Brand accent */
+  --epam-sea-dim: rgba(0, 246, 255, 0.1); /* Subtle background for active states */
+  
+  /* Eye-Safe Surfaces (Elevation) */
+  --epam-surface-1: #161616;    /* For main cards */
+  --epam-surface-2: #222222;    /* For input boxes */
+  --epam-border: #333333;       /* Subtle dividers */
+
+  /* Eye-Safe Typography */
+  --epam-text-primary: #EDEDED;   /* Off-white (Prevents eye strain) */
+  --epam-text-secondary: #9E9E9E; /* Soft gray for labels (Humidity, Wind) */
+  
+  /* Softened Error State */
+  --epam-error-bg: rgba(255, 77, 77, 0.1);
+  --epam-error-text: #FF6B6B;
 }
 
-#map {
-    height: 400px; /* This is mandatory! Leaflet won't show without a height */
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 20px;
-    z-index: 1; /* Ensures it stays behind dropdowns but above the background */
+/* --- BASE STYLES --- */
+body {
+  background-color: var(--epam-bg);
+  color: var(--epam-text-secondary);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  /* Smooths the font rendering on dark backgrounds */
+  -webkit-font-smoothing: antialiased; 
 }
 
-/* Fix for broken map tiles (common in Angular) */
-.leaflet-container {
-    height: 100%;
-    width: 100%;
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--epam-text-primary);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* --- GLOBAL BUTTON STYLES --- */
+button, .btn-primary {
+  background-color: var(--epam-sea);
+  color: #000000; /* Black text on neon blue is highly readable */
+  font-family: var(--font-heading);
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover, .btn-primary:hover {
+  background-color: var(--epam-sea-hover);
+  /* Optional: Adds a subtle neon glow effect on hover */
+  box-shadow: 0 0 10px rgba(0, 246, 255, 0.4); 
 }

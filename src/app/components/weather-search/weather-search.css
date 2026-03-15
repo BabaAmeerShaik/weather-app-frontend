@@ -1,33 +1,51 @@
 /* Import Leaflet CSS immediately */
 @import 'leaflet/dist/leaflet.css';
 
-/* --- Re-using the Palette --- */
+/* --- EPAM Dark Theme Palette --- */
 :root {
-  --primary-blue: #0099cc;
-  --primary-hover: #007399;
-  --dark-text: #333333;
-  --light-text: #666666;
-  --bg-main: #f4f7f9;
-  --white: #ffffff;
-  --border-color: #e0e0e0;
+  /* Brand Core */
+  --epam-bg: #060606;
+  --epam-sea: #00F6FF;
+  --epam-sea-hover: #00c4cc;
+  --epam-sea-dim: rgba(0, 246, 255, 0.1);
+  
+  /* Eye-Safe Surfaces */
+  --epam-surface-1: #161616; /* Cards and Nav */
+  --epam-surface-2: #222222; /* Inputs */
+  --epam-border: #333333;
+  
+  /* Typography */
+  --epam-text-primary: #EDEDED;
+  --epam-text-secondary: #9E9E9E;
+  
+  /* System Fonts */
+  --font-heading: 'Museo', 'Segoe UI', sans-serif;
+  --font-body: 'Source Sans Pro', 'Calibri', sans-serif;
+  
+  /* Error State */
+  --epam-error-bg: rgba(255, 107, 107, 0.1);
+  --epam-error-text: #FF6B6B;
+  --epam-error-border: rgba(255, 107, 107, 0.3);
 }
 
 /* --- Layout --- */
 .enterprise-layout {
   min-height: 100vh;
-  background-color: var(--bg-main);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--epam-bg);
+  font-family: var(--font-body);
+  color: var(--epam-text-secondary);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* --- Top Navigation Bar --- */
 .top-nav {
-  background-color: var(--white);
+  background-color: var(--epam-surface-1);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 3px solid var(--primary-blue); /* Colorful accent border */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-bottom: 2px solid var(--epam-sea); /* EPAM Sea accent border */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .nav-brand {
@@ -38,31 +56,35 @@
 .logo-mark-small {
   width: 30px;
   height: 30px;
-  background-color: var(--primary-blue);
+  background-color: var(--epam-sea);
   margin-right: 15px;
   border-radius: 3px;
+  box-shadow: 0 0 10px var(--epam-sea-dim);
 }
 
 .brand-text {
+  font-family: var(--font-heading);
   font-size: 22px;
-  font-weight: 300;
-  color: var(--dark-text);
+  font-weight: 600;
+  color: var(--epam-text-primary);
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--primary-blue);
-  color: var(--primary-blue);
+  border: 1px solid var(--epam-sea);
+  color: var(--epam-sea);
   padding: 8px 20px;
+  font-family: var(--font-heading);
   font-weight: 600;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .btn-outline:hover {
-  background-color: var(--primary-blue);
-  color: var(--white);
+  background-color: var(--epam-sea);
+  color: #000000; /* Black text on neon for high contrast */
+  box-shadow: 0 0 10px var(--epam-sea-dim);
 }
 
 /* --- Main Content Container --- */
@@ -74,25 +96,27 @@
 
 /* --- Cards --- */
 .dashboard-card {
-  background-color: var(--white);
+  background-color: var(--epam-surface-1);
   padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   margin-bottom: 30px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--epam-border);
 }
 
 /* --- Search Section Stylings --- */
 .search-card h2 {
+  font-family: var(--font-heading);
   margin-top: 0;
-  color: var(--dark-text);
-  font-weight: 300;
+  color: var(--epam-text-primary);
+  font-weight: 600;
   font-size: 26px;
 }
 
 .subtitle {
-  color: var(--light-text);
+  color: var(--epam-text-secondary);
   margin-bottom: 25px;
+  font-size: 16px;
 }
 
 .search-group {
@@ -101,32 +125,42 @@
 }
 
 .search-group input {
-  flex-grow: 1; /* Input takes available space */
+  flex-grow: 1;
+  background-color: var(--epam-surface-2);
+  color: var(--epam-text-primary);
   padding: 15px;
   font-size: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 3px;
+  border: 1px solid var(--epam-border);
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .search-group input:focus {
   outline: none;
-  border-color: var(--primary-blue);
+  border-color: var(--epam-sea);
+  box-shadow: 0 0 0 2px var(--epam-sea-dim);
+}
+
+.search-group input::placeholder {
+  color: #666666;
 }
 
 .search-btn {
   padding: 15px 30px;
-  background-color: var(--primary-blue);
-  color: var(--white);
+  background-color: var(--epam-sea);
+  color: #000000;
+  font-family: var(--font-heading);
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .search-btn:hover {
-  background-color: var(--primary-hover);
+  background-color: var(--epam-sea-hover);
+  box-shadow: 0 0 15px var(--epam-sea-dim);
 }
 
 /* --- Results Section Stylings --- */
@@ -136,28 +170,31 @@
   align-items: start;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--epam-border);
 }
 
 .location-title {
+  font-family: var(--font-heading);
   font-size: 32px;
-  color: var(--dark-text);
+  color: var(--epam-text-primary);
   margin: 0;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .coordinates {
-  color: var(--light-text);
+  color: var(--epam-text-secondary);
   margin-top: 5px;
 }
 
 .status-badge {
-  background-color: var(--primary-blue);
-  color: var(--white);
+  background-color: var(--epam-sea-dim);
+  color: var(--epam-sea);
+  border: 1px solid var(--epam-sea);
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: 600;
   text-transform: capitalize;
+  font-family: var(--font-heading);
 }
 
 /* --- Metrics Grid --- */
@@ -168,21 +205,25 @@
 
 .metric-primary {
   padding-right: 40px;
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--epam-border);
   margin-right: 40px;
 }
 
 .temp-huge {
+  font-family: var(--font-heading);
   display: block;
   font-size: 64px;
-  color: var(--dark-text);
+  color: var(--epam-text-primary);
   font-weight: 700;
   line-height: 1;
 }
 
 .feels-like {
-  color: var(--light-text);
-  font-size: 16px;
+  color: var(--epam-sea);
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 .metric-secondary-grid {
@@ -196,7 +237,7 @@
 }
 
 .metric-label {
-  color: var(--light-text);
+  color: var(--epam-text-secondary);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -204,7 +245,7 @@
 }
 
 .metric-value {
-  color: var(--dark-text);
+  color: var(--epam-text-primary);
   font-size: 24px;
   font-weight: 600;
 }
@@ -214,19 +255,23 @@
   height: 400px;
   width: 100%;
   margin-top: 30px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  border: 1px solid var(--epam-border);
   z-index: 1;
+  /* Optional: Darkens the map tiles slightly to fit the dark theme better */
+  filter: contrast(0.9) brightness(0.8) sepia(0.3) hue-rotate(180deg); 
 }
 
-/* Alert Styles */
+/* --- Alert Styles --- */
 .alert {
   padding: 15px;
   margin-top: 20px;
-  border-radius: 3px;
+  border-radius: 4px;
+  font-weight: 600;
 }
+
 .alert-error {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background-color: var(--epam-error-bg);
+  color: var(--epam-error-text);
+  border: 1px solid var(--epam-error-border);
 }
