@@ -1,51 +1,53 @@
 /* Import Leaflet CSS immediately */
 @import 'leaflet/dist/leaflet.css';
 
-/* --- EPAM Dark Theme Palette --- */
+/* =========================================================
+   EPAM OFFICIAL BRAND DESIGN SYSTEM
+   ========================================================= */
 :root {
-  /* Brand Core */
-  --epam-bg: #060606;
+  /* Dark Mode Core */
+  --epam-night: #060606;
   --epam-sea: #00F6FF;
-  --epam-sea-hover: #00c4cc;
-  --epam-sea-dim: rgba(0, 246, 255, 0.1);
-  
-  /* Eye-Safe Surfaces */
-  --epam-surface-1: #161616; /* Cards and Nav */
-  --epam-surface-2: #222222; /* Inputs */
-  --epam-border: #333333;
-  
+  --epam-mint: #00FFF0;
+  --epam-lilac: #B896FF;
+  --epam-sky: #7BA8FF;
+
+  /* Light Mode Core (Used for contrast/text) */
+  --epam-snow: #FBFAFA;
+  --epam-cobalt: #0047FF;
+
   /* Typography */
-  --epam-text-primary: #EDEDED;
-  --epam-text-secondary: #9E9E9E;
-  
-  /* System Fonts */
   --font-heading: 'Museo', 'Segoe UI', sans-serif;
   --font-body: 'Source Sans Pro', 'Calibri', sans-serif;
-  
-  /* Error State */
-  --epam-error-bg: rgba(255, 107, 107, 0.1);
-  --epam-error-text: #FF6B6B;
-  --epam-error-border: rgba(255, 107, 107, 0.3);
+
+  /* Premium UI Surfaces (Glassmorphism effect) */
+  --surface-card: rgba(251, 250, 250, 0.04); /* 4% Snow for ultra-sleek elevation */
+  --surface-input: rgba(251, 250, 250, 0.08);
+  --border-subtle: rgba(251, 250, 250, 0.12);
 }
 
 /* --- Layout --- */
 .enterprise-layout {
   min-height: 100vh;
-  background-color: var(--epam-bg);
+  background-color: var(--epam-night);
   font-family: var(--font-body);
-  color: var(--epam-text-secondary);
+  color: var(--epam-snow);
   -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.3px;
 }
 
-/* --- Top Navigation Bar --- */
+/* =========================================================
+   TOP NAVIGATION
+   ========================================================= */
 .top-nav {
-  background-color: var(--epam-surface-1);
-  padding: 15px 30px;
+  background-color: var(--epam-night);
+  padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--epam-sea); /* EPAM Sea accent border */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Premium gradient border matching the brand palette */
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--epam-sea), var(--epam-lilac), var(--epam-cobalt)) 1;
 }
 
 .nav-brand {
@@ -54,26 +56,27 @@
 }
 
 .logo-mark-small {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   background-color: var(--epam-sea);
   margin-right: 15px;
-  border-radius: 3px;
-  box-shadow: 0 0 10px var(--epam-sea-dim);
+  border-radius: 2px;
 }
 
 .brand-text {
   font-family: var(--font-heading);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--epam-text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--epam-snow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid var(--epam-sea);
-  color: var(--epam-sea);
-  padding: 8px 20px;
+  border: 1px solid var(--epam-sky);
+  color: var(--epam-sky);
+  padding: 8px 24px;
   font-family: var(--font-heading);
   font-weight: 600;
   border-radius: 4px;
@@ -82,40 +85,42 @@
 }
 
 .btn-outline:hover {
-  background-color: var(--epam-sea);
-  color: #000000; /* Black text on neon for high contrast */
-  box-shadow: 0 0 10px var(--epam-sea-dim);
+  background-color: var(--epam-sky);
+  color: var(--epam-night);
 }
 
-/* --- Main Content Container --- */
+/* =========================================================
+   MAIN DASHBOARD & CARDS
+   ========================================================= */
 .dashboard-container {
-  max-width: 1000px;
-  margin: 40px auto;
+  max-width: 1050px;
+  margin: 50px auto;
   padding: 0 20px;
 }
 
-/* --- Cards --- */
 .dashboard-card {
-  background-color: var(--epam-surface-1);
-  padding: 30px;
+  background-color: var(--surface-card);
+  backdrop-filter: blur(10px);
+  padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  margin-bottom: 30px;
-  border: 1px solid var(--epam-border);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 40px;
 }
 
-/* --- Search Section Stylings --- */
+/* =========================================================
+   SEARCH SECTION
+   ========================================================= */
 .search-card h2 {
   font-family: var(--font-heading);
   margin-top: 0;
-  color: var(--epam-text-primary);
-  font-weight: 600;
-  font-size: 26px;
+  color: var(--epam-snow);
+  font-weight: 700;
+  font-size: 28px;
 }
 
 .subtitle {
-  color: var(--epam-text-secondary);
-  margin-bottom: 25px;
+  color: var(--epam-sky); /* Using Sky for soft, readable subtext */
+  margin-bottom: 30px;
   font-size: 16px;
 }
 
@@ -126,29 +131,30 @@
 
 .search-group input {
   flex-grow: 1;
-  background-color: var(--epam-surface-2);
-  color: var(--epam-text-primary);
-  padding: 15px;
+  background-color: var(--surface-input);
+  color: var(--epam-snow);
+  padding: 16px 20px;
   font-size: 16px;
-  border: 1px solid var(--epam-border);
-  border-radius: 4px;
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--border-subtle);
+  border-radius: 4px 4px 0 0;
   transition: all 0.3s ease;
 }
 
 .search-group input:focus {
   outline: none;
-  border-color: var(--epam-sea);
-  box-shadow: 0 0 0 2px var(--epam-sea-dim);
+  background-color: rgba(251, 250, 250, 0.12);
+  border-bottom: 2px solid var(--epam-sea);
 }
 
 .search-group input::placeholder {
-  color: #666666;
+  color: rgba(251, 250, 250, 0.4);
 }
 
 .search-btn {
-  padding: 15px 30px;
+  padding: 16px 35px;
   background-color: var(--epam-sea);
-  color: #000000;
+  color: var(--epam-night); /* Night text on Sea bg for max readability */
   font-family: var(--font-heading);
   border: none;
   border-radius: 4px;
@@ -159,76 +165,85 @@
 }
 
 .search-btn:hover {
-  background-color: var(--epam-sea-hover);
-  box-shadow: 0 0 15px var(--epam-sea-dim);
+  background-color: var(--epam-mint); /* Smooth transition to Mint on hover */
+  transform: translateY(-1px);
 }
 
-/* --- Results Section Stylings --- */
+/* =========================================================
+   RESULTS SECTION
+   ========================================================= */
 .results-header {
   display: flex;
   justify-content: space-between;
   align-items: start;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--epam-border);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .location-title {
   font-family: var(--font-heading);
-  font-size: 32px;
-  color: var(--epam-text-primary);
+  font-size: 36px;
+  color: var(--epam-snow);
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .coordinates {
-  color: var(--epam-text-secondary);
-  margin-top: 5px;
+  color: var(--epam-sky);
+  margin-top: 8px;
+  font-family: monospace;
+  font-size: 14px;
 }
 
 .status-badge {
-  background-color: var(--epam-sea-dim);
+  background-color: rgba(0, 246, 255, 0.1);
   color: var(--epam-sea);
   border: 1px solid var(--epam-sea);
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 4px; /* Squared off edges look more 'enterprise' than pills */
   font-weight: 600;
-  text-transform: capitalize;
-  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 
-/* --- Metrics Grid --- */
+/* =========================================================
+   DATA METRICS GRID
+   ========================================================= */
 .metrics-container {
   display: flex;
   align-items: center;
 }
 
 .metric-primary {
-  padding-right: 40px;
-  border-right: 1px solid var(--epam-border);
-  margin-right: 40px;
+  padding-right: 50px;
+  border-right: 1px solid var(--border-subtle);
+  margin-right: 50px;
 }
 
 .temp-huge {
   font-family: var(--font-heading);
   display: block;
-  font-size: 64px;
-  color: var(--epam-text-primary);
+  font-size: 80px;
+  color: var(--epam-snow);
   font-weight: 700;
   line-height: 1;
 }
 
 .feels-like {
-  color: var(--epam-sea);
-  font-size: 18px;
+  color: var(--epam-mint); /* Mint stands out beautifully under the white text */
+  font-size: 20px;
   font-weight: 600;
-  margin-top: 10px;
+  margin-top: 15px;
   display: inline-block;
+  text-transform: capitalize;
 }
 
 .metric-secondary-grid {
   display: flex;
-  gap: 40px;
+  gap: 60px;
 }
 
 .metric-box {
@@ -237,41 +252,46 @@
 }
 
 .metric-label {
-  color: var(--epam-text-secondary);
+  color: var(--epam-lilac); /* Lilac is perfect for secondary data labels */
   font-size: 14px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .metric-value {
-  color: var(--epam-text-primary);
-  font-size: 24px;
+  color: var(--epam-snow);
+  font-size: 28px;
+  font-family: var(--font-heading);
   font-weight: 600;
 }
 
-/* --- Map Container --- */
+/* =========================================================
+   MAP & ALERTS
+   ========================================================= */
 .leaflet-map-container {
-  height: 400px;
+  height: 450px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 40px;
   border-radius: 8px;
-  border: 1px solid var(--epam-border);
+  border: 1px solid var(--border-subtle);
   z-index: 1;
-  /* Optional: Darkens the map tiles slightly to fit the dark theme better */
-  filter: contrast(0.9) brightness(0.8) sepia(0.3) hue-rotate(180deg); 
+  /* Dark mode filter for the map tiles */
+  filter: contrast(0.9) brightness(0.7) sepia(0.3) hue-rotate(180deg) saturate(2); 
 }
 
-/* --- Alert Styles --- */
 .alert {
-  padding: 15px;
+  padding: 16px 20px;
   margin-top: 20px;
   border-radius: 4px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .alert-error {
-  background-color: var(--epam-error-bg);
-  color: var(--epam-error-text);
-  border: 1px solid var(--epam-error-border);
+  background-color: rgba(251, 250, 250, 0.05);
+  color: #FF5252;
+  border-left: 4px solid #FF5252; /* Sleek side-border instead of a full pink box */
 }

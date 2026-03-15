@@ -1,180 +1,138 @@
-/* --- EPAM-inspired Color Palette --- */
-:root {
-  --primary-blue: #0099cc; /* Vibrant Cyan-Blue for primary actions */
-  --primary-hover: #007399; /* Darker shade for hover state */
-  --dark-text: #333333;     /* Charcoal for main text */
-  --light-text: #666666;    /* Medium gray for secondary text */
-  --bg-main: #f4f7f9;       /* Very light gray background */
-  --white: #ffffff;
-  --border-color: #e0e0e0;
-  --error-red: #d9534f;
-  --success-green: #5cb85c;
-}
-
-/* --- Main Layout --- */
-.enterprise-layout {
+/* --- LOGIN WRAPPER & AMBIENT GLOW --- */
+.login-wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-main);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--epam-night);
+  /* Creates a massive, subtle neon blue spotlight at the top of the screen */
+  background-image: radial-gradient(circle at 50% -20%, rgba(0, 246, 255, 0.15) 0%, transparent 60%);
   padding: 20px;
 }
 
-/* --- Login Card --- */
-.auth-card {
-  background-color: var(--white);
+/* --- THE GLASS CARD --- */
+.login-card {
+  background-color: var(--surface-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 50px 40px;
   width: 100%;
-  max-width: 450px;
-  padding: 40px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Clean, solid shadow, no glass */
-  border-radius: 4px; /* Minimal rounding for a professional look */
-  border-top: 4px solid var(--primary-blue); /* Colorful accent bar on top */
+  max-width: 420px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
 }
 
-/* --- Header --- */
-.card-header {
-  text-align: center;
-  margin-bottom: 30px;
+/* --- BRANDING --- */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
 }
 
-.card-header h2 {
-  margin: 0 0 10px 0;
-  color: var(--dark-text);
+.brand-header h2 {
+  margin: 0;
   font-size: 28px;
-  font-weight: 300; /* Clean, modern font weight */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
 .subtitle {
-  margin: 0;
-  color: var(--light-text);
-  font-size: 16px;
-}
-
-/* --- Form Elements --- */
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--dark-text);
+  text-align: center;
+  color: var(--epam-sky);
+  margin-bottom: 40px;
   font-size: 14px;
 }
 
-input {
-  width: 100%;
-  padding: 12px 15px;
-  font-size: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 3px;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
-  transition: border-color 0.3s;
+/* --- FORM INPUTS --- */
+.form-group {
+  margin-bottom: 25px;
 }
 
-input:focus {
-  outline: none;
-  border-color: var(--primary-blue);
-}
-
-/* --- Solid, Colorful Buttons --- */
-.btn-primary {
-  width: 100%;
-  padding: 12px;
-  background-color: var(--primary-blue); /* Solid vibrant blue */
-  color: var(--white);
-  border: none;
-  border-radius: 3px;
-  font-size: 18px;
+.form-group label {
+  display: block;
+  color: var(--epam-lilac);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background-color: var(--primary-hover);
+.form-group input {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't push input outside the card */
+  background-color: var(--surface-input);
+  color: var(--epam-snow);
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--border-subtle);
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.form-group input:focus {
+  outline: none;
+  background-color: rgba(251, 250, 250, 0.12);
+  border-bottom-color: var(--epam-sea);
 }
 
-/* --- Dividers & Google SSO --- */
+.full-width {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* --- DIVIDER --- */
 .divider {
+  display: flex;
+  align-items: center;
   text-align: center;
-  margin: 25px 0;
-  position: relative;
+  margin: 30px 0;
+  color: rgba(251, 250, 250, 0.4);
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .divider span {
-  background-color: var(--white);
   padding: 0 15px;
-  color: var(--light-text);
-  font-size: 14px;
-  position: relative;
-  z-index: 1;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--epam-sky);
 }
 
-.divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  border-top: 1px solid var(--border-color);
-  z-index: 0;
-}
-
-.sso-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-  /* Ensures the Google button container has height */
-  min-height: 50px; 
-}
-
-/* --- Footer --- */
-.card-footer {
-  text-align: center;
+/* --- SSO BUTTON --- */
+.btn-sso {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--epam-snow);
+  padding: 14px;
+  border-radius: 4px;
+  font-family: var(--font-heading);
   font-size: 15px;
-  color: var(--light-text);
-  margin-top: 20px;
-}
-
-.btn-link {
-  background: none;
-  border: none;
-  color: var(--primary-blue);
   font-weight: 600;
   cursor: pointer;
-  padding-left: 5px;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
 }
 
-.btn-link:hover {
-  text-decoration: underline;
+.btn-sso:hover {
+  background-color: rgba(251, 250, 250, 0.05);
+  border-color: var(--epam-snow);
 }
 
-/* --- Alerts --- */
-.alert {
-  padding: 15px;
-  margin-bottom: 25px;
-  border-radius: 3px;
-  font-size: 14px;
-}
-
-.alert-error {
-  background-color: #f8d7da;
-  color: var(--error-red);
-  border: 1px solid #f5c6cb;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  color: var(--success-green);
-  border: 1px solid #c3e6cb;
+.sso-icon {
+  width: 20px;
+  height: 20px;
 }
